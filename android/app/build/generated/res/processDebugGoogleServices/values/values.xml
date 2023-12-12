@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">57809063990</string>
+    <string name="google_api_key" translatable="false">AIzaSyBQ-JOe3lPz-ohwFkwt5uaV19Epl9m1eMQ</string>
+    <string name="google_app_id" translatable="false">1:57809063990:android:69aede65b0177cc3770897</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBQ-JOe3lPz-ohwFkwt5uaV19Epl9m1eMQ</string>
+    <string name="google_storage_bucket" translatable="false">shink-app.appspot.com</string>
+    <string name="project_id" translatable="false">shink-app</string>
+</resources>
