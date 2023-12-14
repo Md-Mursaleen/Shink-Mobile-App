@@ -122,7 +122,7 @@ const data = [
     },
 ];
 
-const HomeScreen = () => {
+const ModalItems = () => {
 
     return (
         <View style={styles.container}>
@@ -169,4 +169,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default HomeScreen;
+export default ModalItems;

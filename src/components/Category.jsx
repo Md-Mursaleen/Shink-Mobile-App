@@ -1,9 +1,12 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable quotes */
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const Category = ({ heading, categories }) => {
   return (
-    <View style={styles.container}>
+    <View style={{ padding: 10 }}>
       <Text style={styles.heading}>{heading}</Text>
       <View style={styles.categoryContainer}>
         {categories.map((category, index) => (
@@ -17,35 +20,29 @@ const Category = ({ heading, categories }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 10,
-  },
   heading: {
+    marginBottom: 10,
     fontWeight: '500',
     fontSize: 16,
-    marginBottom: 10,
-    color:'black',
-    
+    color: 'black',
   },
   categoryContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: "flex-start",
-    
   },
   category: {
-    backgroundColor: '#F0F3F6',
-    borderRadius: 20,
     paddingVertical: 5,
     paddingHorizontal: 15,
     margin: 5,
     flexBasis: 'auto', // This will allow the items to size themselves based on their content
+    backgroundColor: '#F0F3F6',
+    borderRadius: 20,
   },
   categoryText: {
     fontSize: 14,
-    fontWeight:'400',
-    color:'black'
-
+    fontWeight: '400',
+    color: '#000000',
   },
 });
 

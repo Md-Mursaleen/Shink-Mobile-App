@@ -35,17 +35,18 @@ com.shinkapp-jetified-tracing-1.1.0-33 C:\Users\md mursaleen\.gradle\caches\tran
 com.shinkapp-jetified-savedstate-1.2.0-34 C:\Users\md mursaleen\.gradle\caches\transforms-3\edb803a56d13cd5ef8eaa729715954ef\transformed\jetified-savedstate-1.2.0\res
 com.shinkapp-material-1.9.0-35 C:\Users\md mursaleen\.gradle\caches\transforms-3\edf32dce11bf18e734220f486e73f5f1\transformed\material-1.9.0\res
 com.shinkapp-lifecycle-viewmodel-2.5.0-36 C:\Users\md mursaleen\.gradle\caches\transforms-3\f3bddd4ee402ac693d2367a6a583c674\transformed\lifecycle-viewmodel-2.5.0\res
-com.shinkapp-pngs-37 C:\Users\md mursaleen\Downloads\shink-app\shink-mobile-app\android\app\build\generated\res\pngs\debug
-com.shinkapp-res-38 C:\Users\md mursaleen\Downloads\shink-app\shink-mobile-app\android\app\build\generated\res\processDebugGoogleServices
-com.shinkapp-resValues-39 C:\Users\md mursaleen\Downloads\shink-app\shink-mobile-app\android\app\build\generated\res\resValues\debug
-com.shinkapp-rs-40 C:\Users\md mursaleen\Downloads\shink-app\shink-mobile-app\android\app\build\generated\res\rs\debug
-com.shinkapp-mergeDebugResources-41 C:\Users\md mursaleen\Downloads\shink-app\shink-mobile-app\android\app\build\intermediates\incremental\debug\mergeDebugResources\merged.dir
-com.shinkapp-mergeDebugResources-42 C:\Users\md mursaleen\Downloads\shink-app\shink-mobile-app\android\app\build\intermediates\incremental\debug\mergeDebugResources\stripped.dir
-com.shinkapp-merged_res-43 C:\Users\md mursaleen\Downloads\shink-app\shink-mobile-app\android\app\build\intermediates\merged_res\debug
-com.shinkapp-debug-44 C:\Users\md mursaleen\Downloads\shink-app\shink-mobile-app\android\app\src\debug\res
-com.shinkapp-main-45 C:\Users\md mursaleen\Downloads\shink-app\shink-mobile-app\android\app\src\main\res
-com.shinkapp-packaged_res-46 C:\Users\md mursaleen\Downloads\shink-app\shink-mobile-app\node_modules\react-native-image-picker\android\build\intermediates\packaged_res\debug
-com.shinkapp-packaged_res-47 C:\Users\md mursaleen\Downloads\shink-app\shink-mobile-app\node_modules\react-native-safe-area-context\android\build\intermediates\packaged_res\debug
-com.shinkapp-packaged_res-48 C:\Users\md mursaleen\Downloads\shink-app\shink-mobile-app\node_modules\react-native-screens\android\build\intermediates\packaged_res\debug
-com.shinkapp-packaged_res-49 C:\Users\md mursaleen\Downloads\shink-app\shink-mobile-app\node_modules\react-native-svg\android\build\intermediates\packaged_res\debug
-com.shinkapp-packaged_res-50 C:\Users\md mursaleen\Downloads\shink-app\shink-mobile-app\node_modules\react-native-vector-icons\android\build\intermediates\packaged_res\debug
+com.shinkapp-pngs-37 C:\Users\md mursaleen\Documents\Shink Mobile App\shink-mobile-app\android\app\build\generated\res\pngs\debug
+com.shinkapp-res-38 C:\Users\md mursaleen\Documents\Shink Mobile App\shink-mobile-app\android\app\build\generated\res\processDebugGoogleServices
+com.shinkapp-resValues-39 C:\Users\md mursaleen\Documents\Shink Mobile App\shink-mobile-app\android\app\build\generated\res\resValues\debug
+com.shinkapp-rs-40 C:\Users\md mursaleen\Documents\Shink Mobile App\shink-mobile-app\android\app\build\generated\res\rs\debug
+com.shinkapp-mergeDebugResources-41 C:\Users\md mursaleen\Documents\Shink Mobile App\shink-mobile-app\android\app\build\intermediates\incremental\debug\mergeDebugResources\merged.dir
+com.shinkapp-mergeDebugResources-42 C:\Users\md mursaleen\Documents\Shink Mobile App\shink-mobile-app\android\app\build\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+com.shinkapp-merged_res-43 C:\Users\md mursaleen\Documents\Shink Mobile App\shink-mobile-app\android\app\build\intermediates\merged_res\debug
+com.shinkapp-debug-44 C:\Users\md mursaleen\Documents\Shink Mobile App\shink-mobile-app\android\app\src\debug\res
+com.shinkapp-main-45 C:\Users\md mursaleen\Documents\Shink Mobile App\shink-mobile-app\android\app\src\main\res
+com.shinkapp-packaged_res-46 C:\Users\md mursaleen\Documents\Shink Mobile App\shink-mobile-app\node_modules\react-native-gesture-handler\android\build\intermediates\packaged_res\debug
+com.shinkapp-packaged_res-47 C:\Users\md mursaleen\Documents\Shink Mobile App\shink-mobile-app\node_modules\react-native-image-picker\android\build\intermediates\packaged_res\debug
+com.shinkapp-packaged_res-48 C:\Users\md mursaleen\Documents\Shink Mobile App\shink-mobile-app\node_modules\react-native-safe-area-context\android\build\intermediates\packaged_res\debug
+com.shinkapp-packaged_res-49 C:\Users\md mursaleen\Documents\Shink Mobile App\shink-mobile-app\node_modules\react-native-screens\android\build\intermediates\packaged_res\debug
+com.shinkapp-packaged_res-50 C:\Users\md mursaleen\Documents\Shink Mobile App\shink-mobile-app\node_modules\react-native-svg\android\build\intermediates\packaged_res\debug
+com.shinkapp-packaged_res-51 C:\Users\md mursaleen\Documents\Shink Mobile App\shink-mobile-app\node_modules\react-native-vector-icons\android\build\intermediates\packaged_res\debug

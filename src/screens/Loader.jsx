@@ -1,11 +1,10 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
-import image from '../assets/loader.gif';
 const Loader = () => {
   return (
     <View style={styles.container}>
-      <Image source={image} style={styles.image} />
+      <Image source={require('../assets/images/loader-image.gif')} style={styles.image} />
     </View>
   );
 };

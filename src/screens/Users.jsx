@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { View, ScrollView, SafeAreaView, StyleSheet } from 'react-native';
 import Homepage from './Homapage';
 import Loader from './Loader';
-const HomeScreen = () => {
+const Users = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -35,7 +35,7 @@ const HomeScreen = () => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }}>
       <View style={styles.subContainer}>
         <ScrollView>
           {users.length !== 0 && <Homepage users={users} />}
@@ -45,7 +45,7 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default Users;
 
 const styles = StyleSheet.create({
   loadingContainer: {

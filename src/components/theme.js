@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable eol-last */
 import { Dimensions, PixelRatio } from 'react-native';
 export const SCREEN_WIDTH = Dimensions.get('window').width;
 export const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -41,17 +43,16 @@ const theme = {
     padding: normalize(12),
   },
   inputContainer: {
+    paddingVertical: normalize(4),
+    paddingHorizontal: normalize(16),
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     width: normalize(340),
     borderRadius: normalize(8),
-    paddingVertical: normalize(4),
-    paddingHorizontal: normalize(16),
     backgroundColor: '#FFFFFF',
     borderWidth: normalize(1),
     borderColor: '#979797',
-    borderRadius: normalize(8)
   },
   flexRow: {
     display: 'flex',

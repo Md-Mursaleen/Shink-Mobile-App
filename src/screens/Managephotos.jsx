@@ -5,19 +5,9 @@
 /* eslint-disable quotes */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState, useEffect } from 'react';
-import {
-  Image,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  Alert,
-  ScrollView,
-  Modal,
-  TouchableHighlight,
-} from 'react-native';
-import ImgixClient from '@imgix/js-core';
+import { Image, View, StyleSheet, TouchableOpacity, Text, Alert, ScrollView, Modal, TouchableHighlight } from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
+import ImgixClient from '@imgix/js-core';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const DraggablePics = ({ onDragRelease, userid }) => {
@@ -304,6 +294,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
+    backgroundColor: '#ffffff',
   },
   heading: {
     fontSize: 24,
