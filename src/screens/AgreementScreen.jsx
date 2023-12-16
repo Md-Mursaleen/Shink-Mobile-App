@@ -15,7 +15,7 @@ const AgreementScreen = () => {
     };
     const onPressAgree = () => {
         if (isEndReached) {
-            navigation.navigate("MyTabs");
+            navigation.navigate("BottomTab");
         }
     };
     return (

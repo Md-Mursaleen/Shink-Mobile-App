@@ -8,7 +8,6 @@ import { data } from '../data/UserInterestData';
 
 const YourInterestScreen = () => {
     const [selectedInterests, setSelectedInterest] = useState([]);
-    console.log(selectedInterests);
 
     return (
         <>

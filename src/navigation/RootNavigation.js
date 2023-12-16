@@ -9,6 +9,7 @@ import Users from '../screens/Users';
 import AgreementScreen from '../screens/AgreementScreen';
 import ChatScreen from '../screens/ChatScreen';
 import YourInterestScreen from '../screens/YourInterestScreen';
+import FlagTypeSelectionScreen from '../screens/FlagTypeSelectionScreen';
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -53,9 +54,10 @@ const BottomTabNavigation = () => {
 const RootNavigation = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="BottomTab" component={BottomTabNavigation} />
+            <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Agreement">
                 <Stack.Screen name="Agreement" component={AgreementScreen} />
+                <Stack.Screen name="BottomTab" component={BottomTabNavigation} />
+                <Stack.Screen name="FlagTypeSelection" component={FlagTypeSelectionScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     );

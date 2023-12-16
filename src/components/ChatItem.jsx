@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable no-unused-vars */
 /* eslint-disable eol-last */
 import React from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
@@ -22,7 +21,7 @@ const ChatItem = ({ item }) => {
                 { width: 45, height: 45 }]} />
             <View style={styles.subContainer}>
                 <View style={styles.textContainer}>
-                    <Text style={styles.userNameTextStyle}>{name}</Text>
+                    <Text style={[styles.userNameTextStyle, type === 'deleted' && { top: 5 }]}>{name}</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         {(status === 'read' && message_received === false && message_sent === true) && (
                             <Image source={require('../assets/images/read-line-duotone.png')}

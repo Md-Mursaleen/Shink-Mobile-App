@@ -1,7 +1,0 @@
-#Sat Dec 09 18:36:34 IST 2023
-base.1=C\:\\Users\\HP\\Desktop\\shink-all-app\\shink-app\\android\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes2.dex
-path.1=classes2.dex
-base.0=C\:\\Users\\HP\\Desktop\\shink-all-app\\shink-app\\android\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes.dex
-renamed.1=classes2.dex
-renamed.0=classes.dex
-path.0=classes.dex

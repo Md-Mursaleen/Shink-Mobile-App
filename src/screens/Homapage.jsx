@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     padding: 20,
-    marginTop: '155%',
+    marginTop: '153%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
