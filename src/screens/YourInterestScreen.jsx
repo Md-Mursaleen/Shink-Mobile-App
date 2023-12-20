@@ -8,6 +8,15 @@ import { data } from '../data/UserInterestData';
 
 const YourInterestScreen = () => {
     const [selectedInterests, setSelectedInterest] = useState([]);
+    const onPressInterestItem = (item) => {
+        if (selectedInterests.includes(item.text)) {
+            setSelectedInterest(
+                selectedInterests.filter(interest => interest !== item.text)
+            );
+        } else {
+            setSelectedInterest([...selectedInterests, item.text]);
+        }
+    };
 
     return (
         <>
@@ -19,7 +28,7 @@ const YourInterestScreen = () => {
                             style={[styles.itemContainer, selectedInterests.includes(item.text) ?
                                 { backgroundColor: "#f0e4fa", borderColor: "#9d4edd" } :
                                 { backgroundColor: "#ffffff", borderColor: "#b3b3b3" }]}
-                            onPress={() => setSelectedInterest([...selectedInterests, item.text])}>
+                            onPress={() => onPressInterestItem(item)}>
                             <Text style={styles.itemTextStyle}>{item.text}</Text>
                         </Pressable>
                     ))}
@@ -27,13 +36,13 @@ const YourInterestScreen = () => {
             </ScrollView>
             <View style={styles.bottomContainer}>
                 <Pressable style={[styles.buttonContainer,
-                selectedInterests.length === 10 ?
-                    { opacity: 1 } :
-                    { opacity: 0.5 }]}>
+                selectedInterests.length >= 1 ?
+                    { backgroundColor: "#9d4edd" } :
+                    { backgroundColor: "#e0e0e0" }]}>
                     <Text style={styles.buttonTextStyle}>Continue</Text>
-                    <Text>{" "}</Text>
+                    {/* <Text>{" "}</Text>
                     <Text style={styles.selectedInterestsLengthTextStyle}>{selectedInterests.length}</Text>
-                    <Text style={styles.selectedInterestsLengthTextStyle}>{"/10"}</Text>
+                    <Text style={styles.selectedInterestsLengthTextStyle}>{"/10"}</Text> */}
                 </Pressable>
             </View>
         </>
@@ -72,17 +81,15 @@ const styles = StyleSheet.create({
     },
     bottomContainer: {
         padding: 8,
-        borderWidth: 1,
-        borderColor: "#f2f2f2",
+        backgroundColor: "#ffffff",
     },
     buttonContainer: {
         padding: 13,
-        marginBottom: 10,
+        // marginBottom: 10, //removed
         marginHorizontal: 10,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#979797",
         borderRadius: 8,
     },
     buttonTextStyle: {

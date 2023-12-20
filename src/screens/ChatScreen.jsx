@@ -10,7 +10,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import ChatItem from '../components/ChatItem';
-import ModalFlagItems from '../components/ModalFlagItems';
+import ModalGreenFlagItems from '../components/ModalGreenFlagItems';
+import ModalRedFlagItems from '../components/ModalRedFlagItems';
 
 const ChatScreen = () => {
     const navigation = useNavigation();
@@ -18,7 +19,9 @@ const ChatScreen = () => {
     const redFlagModalizeRef = useRef(null);
     const [isGreenFlagModalOpened, setIsGreenFlagModalOpened] = useState(false);
     const [isRedFlagModalOpened, setIsRedFlagModalOpened] = useState(false);
-    const [selectedItems, setSelectedItems] = useState([]);
+    const [selectedGreenFlags, setSelectedGreenFlags] = useState([]);
+    const [selectedRedFlags, setSelectedRedFlags] = useState([]);
+    const [messageText, setMessageText] = useState('');
 
     const onFlagButtonPressed = (item) => {
         if (item.category !== 'new-match') {
@@ -28,7 +31,6 @@ const ChatScreen = () => {
             });
         }
     };
-    console.log(selectedItems);
     useEffect(() => {
         if (isGreenFlagModalOpened === true) {
             greenFlagModalizeRef.current?.open();
@@ -123,6 +125,21 @@ const ChatScreen = () => {
             flagName: 'Married',
         },
     ];
+    console.log(selectedGreenFlags);
+    const onRedFlagSubmitButtonPressed = () => {
+        redFlagModalizeRef.current?.close();
+        setMessageText('Thank you for submitting.');
+        setTimeout(() => {
+            setMessageText('');
+        }, 2000);
+    };
+    const onGreenFlagSubmitButtonPressed = () => {
+        greenFlagModalizeRef.current?.close();
+        setMessageText('Thank you for submitting.');
+        setTimeout(() => {
+            setMessageText('');
+        }, 2000);
+    };
 
     return (
         <>
@@ -139,15 +156,16 @@ const ChatScreen = () => {
                         </View>
                         <Text style={styles.modalTitleTextStyle}>Red Flags</Text>
                         {redFlagDataItems.map((item, index) => (
-                            <ModalFlagItems key={index}
-                                item={item} selectedItems={selectedItems}
-                                setSelectedItems={setSelectedItems} />
+                            <ModalRedFlagItems key={index}
+                                item={item} selectedRedFlags={selectedRedFlags}
+                                setSelectedRedFlags={setSelectedRedFlags} />
                         ))}
                         <View style={styles.bottomContainer}>
                             <Pressable style={[styles.buttonContainer,
-                            selectedItems.lenght > 1 ?
+                            selectedRedFlags?.length >= 1 ?
                                 { backgroundColor: '#9d4edd' } :
-                                { backgroundColor: '#e0e0e0' }]}>
+                                { backgroundColor: '#e0e0e0' }]}
+                                onPress={() => onRedFlagSubmitButtonPressed()}>
                                 <Text style={styles.buttonTextStyle}>Submit</Text>
                             </Pressable>
                         </View>
@@ -167,15 +185,16 @@ const ChatScreen = () => {
                         </View>
                         <Text style={styles.modalTitleTextStyle}>Green Flags</Text>
                         {greenFlagDataItems.map((item, index) => (
-                            <ModalFlagItems key={index}
-                                item={item} selectedItems={selectedItems}
-                                setSelectedItems={setSelectedItems} />
+                            <ModalGreenFlagItems key={index}
+                                item={item} selectedGreenFlags={selectedGreenFlags}
+                                setSelectedGreenFlags={setSelectedGreenFlags} />
                         ))}
                         <View style={styles.bottomContainer}>
                             <Pressable style={[styles.buttonContainer,
-                            selectedItems.lenght > 1 ?
+                            selectedGreenFlags?.length >= 1 ?
                                 { backgroundColor: '#9d4edd' } :
-                                { backgroundColor: '#e0e0e0' }]}>
+                                { backgroundColor: '#e0e0e0' }]}
+                                onPress={() => onGreenFlagSubmitButtonPressed()}>
                                 <Text style={styles.buttonTextStyle}>Submit</Text>
                             </Pressable>
                         </View>
@@ -238,6 +257,11 @@ const ChatScreen = () => {
                 }
                 ListFooterComponent={
                     <>
+                        {messageText !== '' && (
+                            <View style={styles.messageTextContainer}>
+                                <Text style={styles.messageTextStyle}>{messageText}</Text>
+                            </View>
+                        )}
                     </>
                 } />
         </>
@@ -356,6 +380,58 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         color: '#ffffff',
         lineHeight: 23.4,
+    },
+    subContainer: {
+        marginHorizontal: 15,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    contentContainer: {
+        paddingHorizontal: 15,
+        paddingVertical: 8,
+        marginVertical: 5,
+        width: '100%',
+        height: 40,
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderWidth: 1,
+        borderRadius: 8,
+    },
+    imageStyle: {
+        width: 23,
+        height: 23,
+    },
+    flagNameTextStyle: {
+        marginLeft: 10,
+        fontSize: 12,
+        fontWeight: '400',
+        fontFamily: 'AvenirNext-Regular',
+        color: '#000000',
+        lineHeight: 16,
+    },
+    checkboxStyle: {
+        flex: 1,
+        marginLeft: -40,
+    },
+    messageTextContainer: {
+        marginTop: '30%',
+        width: '78%',
+        height: 42,
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        backgroundColor: '#f0e4fa',
+        borderRadius: 8,
+    },
+    messageTextStyle: {
+        fontSize: 14,
+        fontWeight: '400',
+        fontFamily: 'AvenirNext-Regular',
+        color: '#9D4EDD',
+        lineHeight: 21,
     },
 });
 

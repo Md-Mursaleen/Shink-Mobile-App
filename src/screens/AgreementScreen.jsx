@@ -18,10 +18,11 @@ const AgreementScreen = () => {
             navigation.navigate("BottomTab");
         }
     };
+
     return (
         <>
             <View style={styles.container}>
-                <Text style={styles.titleTextStyle}>Flag your matches. It helps everyone</Text>
+                {/* <Text style={styles.titleTextStyle}>Flag your matches. It helps everyone</Text> */}
                 <ScrollView style={styles.contentContainer}
                     onScroll={({ nativeEvent }) => {
                         if (isCloseToBottom(nativeEvent)) {
@@ -55,8 +56,8 @@ const AgreementScreen = () => {
             <View style={styles.bottomContainer}>
                 <Pressable style={[styles.buttonContainer,
                 isEndReached ?
-                    { opacity: 1 } :
-                    { opacity: 0.5 }]} onPress={() => onPressAgree()}>
+                    { backgroundColor: "#9d4edd" } :
+                    { backgroundColor: "#e0e0e0" }]} onPress={() => onPressAgree()}>
                     <Text style={styles.buttonTextStyle}>I agree</Text>
                 </Pressable>
             </View>
@@ -67,7 +68,8 @@ const AgreementScreen = () => {
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 22,
-        paddingTop: 45,
+        // paddingTop: 45,
+        paddingTop: 40, //newly added
     },
     titleTextStyle: {
         width: 325,
@@ -77,9 +79,10 @@ const styles = StyleSheet.create({
         lineHeight: 41.6,
     },
     contentContainer: {
-        marginTop: 10,
+        // marginTop: 10,
         width: "auto",
-        height: 525,
+        // height: 525,
+        height: 630, //newly added
         alignContent: 'flex-start',
         borderWidth: 1.3,
         borderColor: '#cfd3d6',
@@ -109,7 +112,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#979797",
         borderRadius: 8,
     },
     buttonTextStyle: {
