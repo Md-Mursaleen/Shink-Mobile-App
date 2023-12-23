@@ -7,11 +7,11 @@ import { View, Text, StyleSheet } from 'react-native';
 const Category = ({ heading, categories }) => {
   return (
     <View style={{ padding: 10 }}>
-      <Text style={styles.heading}>{heading}</Text>
+      <Text style={styles.headingTextStyle}>{heading}</Text>
       <View style={styles.categoryContainer}>
         {categories.map((category, index) => (
-          <View key={index} style={styles.category}>
-            <Text style={styles.categoryText}>{category}</Text>
+          <View key={index} style={styles.categoryItemContainer}>
+            <Text style={styles.categoryTextStyle}>{category}</Text>
           </View>
         ))}
       </View>
@@ -20,29 +20,34 @@ const Category = ({ heading, categories }) => {
 };
 
 const styles = StyleSheet.create({
-  heading: {
-    marginBottom: 10,
-    fontWeight: '500',
-    fontSize: 16,
-    color: 'black',
+  headingTextStyle: {
+    marginBottom: 13,
+    fontSize: 16.5,
+    fontWeight: '600',
+    fontFamily: 'AvenirNext-Bold',
+    color: '#000000',
+    lineHeight: 21,
   },
   categoryContainer: {
-    flexDirection: 'row',
     flexWrap: 'wrap',
+    flexDirection: 'row',
     alignItems: "flex-start",
   },
-  category: {
-    paddingVertical: 5,
-    paddingHorizontal: 15,
-    margin: 5,
+  categoryItemContainer: {
+    paddingVertical: 14,
+    paddingHorizontal: 17,
+    marginHorizontal: 5,
+    marginVertical: 7.5,
     flexBasis: 'auto', // This will allow the items to size themselves based on their content
-    backgroundColor: '#F0F3F6',
-    borderRadius: 20,
+    backgroundColor: '#f0f3f6',
+    borderRadius: 24,
   },
-  categoryText: {
+  categoryTextStyle: {
     fontSize: 14,
     fontWeight: '400',
-    color: '#000000',
+    fontFamily: 'AvenirNext-Regular',
+    color: '#282c3f',
+    lineHeight: 16,
   },
 });
 

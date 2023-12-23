@@ -1,10 +1,11 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
-const Loader = () => {
+const HomeLoader = () => {
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/images/loader-image.gif')} style={styles.image} />
+      <Image source={require('../assets/images/loader-image.gif')}
+        style={styles.imageStyle} />
     </View>
   );
 };
@@ -15,10 +16,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  image: {
+  imageStyle: {
     width: 100, // Set the width and height as needed
     height: 100,
   },
 });
 
-export default Loader;
+export default HomeLoader;

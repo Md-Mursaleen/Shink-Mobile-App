@@ -2,17 +2,18 @@
 /* eslint-disable quotes */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState, useRef } from 'react';
-import { View, Image, TouchableOpacity, StyleSheet, Text, ScrollView } from 'react-native';
+import { View, Image, TouchableOpacity, StyleSheet, Text, ScrollView, Pressable } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import { Modalize } from 'react-native-modalize';
 import { closeSvg, heartSvg, mySvgString, checkmarkSvg } from '../data/SvgImageData';
 import Swiper from 'react-native-deck-swiper';
-import Category from '../components/Category';
-import ModalItems from '../components/ModalItems';
+import Category from './Category';
+import ModalItems from './ModalItems';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Foundation from 'react-native-vector-icons/Foundation';
+import Feather from 'react-native-vector-icons/Feather';
 
-const Homepage = ({ users }) => {
+const HomeComponent = ({ users, navigation }) => {
   const swiperRef = useRef(null);
   const modalizeRef = useRef(null);
   const [isModalOpened, setIsModalOpened] = useState(false);
@@ -66,20 +67,34 @@ const Homepage = ({ users }) => {
           </View>
         </ScrollView>
       </Modalize>
-      <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
+      <View style={styles.container}>
+        <View style={styles.headerContainer}>
+          <Feather name="menu" size={24} color={'#979797'} />
+          <Pressable style={styles.headerSubContainer}
+            onPress={() => navigation.navigate('MyFlags')}>
+            <Text style={styles.flagTextStyle}>My Flags</Text>
+            <Image source={require('../assets/images/green-flag.png')}
+              style={styles.flagImageStyle} />
+            <Image source={require('../assets/images/red-flag.png')}
+              style={styles.flagImageStyle} />
+          </Pressable>
+        </View>
         <Swiper ref={swiperRef} cards={users} renderCard={(user) => {
           return (
             <>
-              <View style={styles.card}>
+              <View style={styles.swiperCardContainer}>
                 <Image source={{ uri: `https://drive.google.com/uc?export=view&id=${getFileId(user.userData.img1)}` }}
-                  style={styles.image} />
+                  style={styles.imageStyle} />
               </View>
-              <View style={{ flex: 1, marginHorizontal: "5%", marginVertical: "-15%", flexDirection: "row", alignItems: "baseline" }}>
-                <Text style={{ fontSize: 29, fontWeight: "500", color: "white" }}>{user.userData.name + " "}
+              <View style={styles.swiperContentContainer}>
+                <Text style={styles.userTextStyle}>
+                  {user.userData.name + " "}
                 </Text>
-                <Text style={{ fontSize: 24, fontWeight: "600", color: "white" }}>{user.userData.age + " "}
+                <Text style={styles.userTextStyle}>
+                  {user.userData.age + " "}
                 </Text>
-                <SvgXml style={{ marginBottom: '2%', alignSelf: 'flex-end' }} xml={checkmarkSvg} width="24" height="24" />
+                <SvgXml xml={checkmarkSvg} width="24" height="24"
+                  style={styles.checkMarkImageStyle} />
               </View>
             </>
           );
@@ -96,34 +111,34 @@ const Homepage = ({ users }) => {
           cardIndex={index}
           backgroundColor={'transparent'}
           stackSize={2}
-          verticalSwipe={false} // Disable vertical swiping
-        // horizontalSwipe={false} // Disable horizontal swiping
-        />
+          verticalSwipe={false} />
         <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={handleLeftSwipe} style={styles.button}>
+          <TouchableOpacity onPress={() => handleLeftSwipe()}
+            style={styles.buttonImageStyle}>
             <SvgXml xml={closeSvg} width="50%" height="50%" />
           </TouchableOpacity>
-          <SvgXml style={styles.buttonFlag} xml={mySvgString} width="178" height="60" onPress={() => onOpenModal()} />
-          <TouchableOpacity onPress={handleRightSwipe} style={styles.button}>
+          <SvgXml xml={mySvgString} width="178" height="60" onPress={() => onOpenModal()}
+            style={styles.buttonFlagImageStyle} />
+          <TouchableOpacity onPress={() => handleRightSwipe()}
+            style={styles.buttonImageStyle}>
             <SvgXml xml={heartSvg} width="70%" height="70%" />
           </TouchableOpacity>
         </View>
       </View>
       {isModalOpened === false && (
-        <View style={{
-          marginTop: '12%',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          padding: 20,
-          alignItems: 'center',
-        }}>
+        <View style={styles.bottomContainer}>
           <View style={{ flex: 1 }} >
-            <Category heading={'My Matching Interests'} categories={users[index].matchingInterests} />
+            <Category heading={'My Matching Interests'}
+              categories={users[index].matchingInterests} />
             <Category heading={'My Info'}
-              categories={[users[index].userData.status, users[index].userData.location, users[index].userData.for]} />
+              categories={[users[index].userData.status, users[index].userData.location,
+              users[index].userData.for]} />
             <Category heading={'My Interests'}
-              categories={[users[index].userData.inter1, users[index].userData.inter2, users[index].userData.inter3, users[index].userData.inter4, users[index].userData.inter5,
-              users[index].userData.inter6, users[index].userData.inter7, users[index].userData.inter8, users[index].userData.inter9]} />
+              categories={[users[index].userData.inter1, users[index].userData.inter2,
+              users[index].userData.inter3, users[index].userData.inter4,
+              users[index].userData.inter5, users[index].userData.inter6,
+              users[index].userData.inter7, users[index].userData.inter8,
+              users[index].userData.inter9]} />
           </View>
         </View>
       )}
@@ -132,47 +147,59 @@ const Homepage = ({ users }) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+  },
+  swiperContentContainer: {
+    flex: 1,
+    marginHorizontal: "5%",
+    marginVertical: "-15%",
+    flexDirection: "row",
+    alignItems: "baseline",
+  },
   name: {
     marginTop: '143%', // Spacing from the top of the card
     fontSize: 24, // Example size, adjust as needed
     fontWeight: 'bold', // Makes the name stand out
-    color: 'black', // Dark text color for readability
+    color: '#000000', // Dark text color for readability
     textAlign: 'center', // Center-align text
   },
   bio: {
-    marginBottom: 10, // Spacing between the name and bio
     paddingHorizontal: 12, // Padding on the sides
+    marginBottom: 10, // Spacing between the name and bio
     fontSize: 16, // Smaller text size for the bio
-    color: '#666', // Lighter text color for the bio
+    color: '#666666', // Lighter text color for the bio
     textAlign: 'center', // Center-align text
   },
-  card: {
-    height: '80%',
+  swiperCardContainer: {
+    marginTop: '2%',
+    height: '82%',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'transparent',
     borderRadius: 12,
   },
-  image: {
+  imageStyle: {
     width: '100%',
     height: '100%',
-    borderRadius: 8,
+    borderRadius: 12,
   },
   buttonContainer: {
     padding: 20,
-    marginTop: '153%',
+    marginTop: '140%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  button: {
+  buttonImageStyle: {
     width: 42,
     height: 42,
-    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    justifyContent: 'center',
+    backgroundColor: '#ffffff',
     borderRadius: 25,
-    shadowColor: '#000', // Shadow is black
+    shadowColor: '#000000', // Shadow is black
     shadowOffset: {
       width: 0,
       height: 2, // Shadow is applied to the bottom
@@ -181,14 +208,14 @@ const styles = StyleSheet.create({
     shadowRadius: 4, // The blur radius of the shadow
     elevation: 3, // Elevation for Android
   },
-  buttonFlag: {
+  buttonFlagImageStyle: {
     width: 42,
     height: 42,
-    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    justifyContent: 'center',
+    backgroundColor: '#ffffff',
     borderRadius: 8,
-    shadowColor: '#000', // Shadow is black
+    shadowColor: '#000000', // Shadow is black
     shadowOffset: {
       width: 0,
       height: 2, // Shadow is applied to the bottom
@@ -239,6 +266,53 @@ const styles = StyleSheet.create({
     marginRight: 9,
     color: '#ffffff',
   },
+  bottomContainer: {
+    padding: 20,
+    marginTop: '12%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  userTextStyle: {
+    fontSize: 30,
+    fontWeight: "500",
+    color: "#ffffff",
+    lineHeight: 42,
+  },
+  headerContainer: {
+    padding: 13.5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#f2f2f2',
+  },
+  headerSubContainer: {
+    width: 120,
+    height: 31,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ffffff',
+    borderRadius: 30,
+  },
+  flagImageStyle: {
+    width: 20,
+    height: 20,
+    resizeMode: 'contain',
+  },
+  flagTextStyle: {
+    marginRight: 5,
+    fontSize: 14,
+    fontWeight: '400',
+    fontFamily: 'AvenirNext-Regular',
+    color: '#9d4edd',
+    lineHeight: 21,
+  },
+  checkMarkImageStyle: {
+    marginLeft: '1%',
+    marginBottom: '2%',
+    alignSelf: 'flex-end',
+  },
 });
 
-export default Homepage;
+export default HomeComponent;

@@ -17,6 +17,8 @@ import com.reactnativecommunity.checkbox.ReactCheckBoxPackage;
 import com.swmansion.gesturehandler.RNGestureHandlerPackage;
 // react-native-image-picker
 import com.imagepicker.ImagePickerPackage;
+// react-native-pager-view
+import com.reactnativepagerview.PagerViewPackage;
 // react-native-safe-area-context
 import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
 // react-native-screens
@@ -73,6 +75,7 @@ public class PackageList {
       new ReactCheckBoxPackage(),
       new RNGestureHandlerPackage(),
       new ImagePickerPackage(),
+      new PagerViewPackage(),
       new SafeAreaContextPackage(),
       new RNScreensPackage(),
       new SvgPackage(),

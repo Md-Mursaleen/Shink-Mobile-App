@@ -5,8 +5,10 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, ScrollView, Pressable } from 'react-native';
 import { data } from '../data/UserInterestData';
+import { useNavigation } from '@react-navigation/native';
 
 const YourInterestScreen = () => {
+    const navigation = useNavigation();
     const [selectedInterests, setSelectedInterest] = useState([]);
     const onPressInterestItem = (item) => {
         if (selectedInterests.includes(item.text)) {
@@ -38,7 +40,8 @@ const YourInterestScreen = () => {
                 <Pressable style={[styles.buttonContainer,
                 selectedInterests.length >= 1 ?
                     { backgroundColor: "#9d4edd" } :
-                    { backgroundColor: "#e0e0e0" }]}>
+                    { backgroundColor: "#e0e0e0" }]}
+                    onPress={() => navigation.navigate('Agreement')}>
                     <Text style={styles.buttonTextStyle}>Continue</Text>
                     {/* <Text>{" "}</Text>
                     <Text style={styles.selectedInterestsLengthTextStyle}>{selectedInterests.length}</Text>
@@ -67,8 +70,8 @@ const styles = StyleSheet.create({
         flexWrap: "wrap",
     },
     itemContainer: {
-        marginVertical: 6,
-        marginHorizontal: 4,
+        marginVertical: 6.5,
+        marginHorizontal: 3,
         paddingHorizontal: 14,
         paddingVertical: 8,
         borderWidth: 1,
@@ -76,21 +79,26 @@ const styles = StyleSheet.create({
     },
     itemTextStyle: {
         fontSize: 12,
+        fontWeight: '400',
+        fontFamily: 'AvenirNext-Regular',
         color: "#000000",
         textAlign: "center",
     },
     bottomContainer: {
-        padding: 8,
-        backgroundColor: "#ffffff",
+        paddingHorizontal: 20,
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderTopWidth: 1,
+        borderTopColor: '#f2f2f2',
     },
     buttonContainer: {
         padding: 13,
-        // marginBottom: 10, //removed
-        marginHorizontal: 10,
-        flexDirection: "row",
+        marginTop: 5,
+        marginBottom: 10, //can be changed
+        width: '100%',
         alignItems: "center",
         justifyContent: "center",
-        borderRadius: 8,
+        borderRadius: 5,
     },
     buttonTextStyle: {
         fontSize: 16,

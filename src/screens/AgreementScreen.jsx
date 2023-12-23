@@ -100,19 +100,19 @@ const styles = StyleSheet.create({
         lineHeight: 21,
     },
     bottomContainer: {
-        marginTop: 'auto',
         padding: 8,
+        marginTop: 'auto',
+        paddingHorizontal: 20,
         borderWidth: 1,
         borderColor: "#f2f2f2",
     },
     buttonContainer: {
         padding: 13,
         marginBottom: 10,
-        marginHorizontal: 10,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        borderRadius: 8,
+        borderRadius: 5,
     },
     buttonTextStyle: {
         fontSize: 16,

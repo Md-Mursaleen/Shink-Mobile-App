@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState, useRef, useEffect } from 'react';
-import { View, StyleSheet, Text, Pressable, ScrollView } from 'react-native';
+import { View, StyleSheet, Text, Pressable, ScrollView, Image } from 'react-native';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { useNavigation } from '@react-navigation/native';
 import { data } from '../data/ChatData';
@@ -22,15 +22,18 @@ const ChatScreen = () => {
     const [selectedGreenFlags, setSelectedGreenFlags] = useState([]);
     const [selectedRedFlags, setSelectedRedFlags] = useState([]);
     const [messageText, setMessageText] = useState('');
+    const [chatData, setChatData] = useState(data);
 
     const onFlagButtonPressed = (item) => {
         if (item.category !== 'new-match') {
             navigation.navigate('FlagTypeSelection', {
                 setIsGreenFlagModalOpened: setIsGreenFlagModalOpened,
                 setIsRedFlagModalOpened: setIsRedFlagModalOpened,
+                editing: false,
             });
         }
     };
+
     useEffect(() => {
         if (isGreenFlagModalOpened === true) {
             greenFlagModalizeRef.current?.open();
@@ -125,7 +128,9 @@ const ChatScreen = () => {
             flagName: 'Married',
         },
     ];
+
     console.log(selectedGreenFlags);
+
     const onRedFlagSubmitButtonPressed = () => {
         redFlagModalizeRef.current?.close();
         setMessageText('Thank you for submitting.');
@@ -133,12 +138,19 @@ const ChatScreen = () => {
             setMessageText('');
         }, 2000);
     };
+
     const onGreenFlagSubmitButtonPressed = () => {
         greenFlagModalizeRef.current?.close();
         setMessageText('Thank you for submitting.');
         setTimeout(() => {
             setMessageText('');
         }, 2000);
+    };
+
+    const deletingChatItem = async (chatItem) => {
+        const newChatItems = chatData.filter((item, index) =>
+            item.userId !== chatItem.userId);
+        setChatData(newChatItems);
     };
 
     return (
@@ -201,29 +213,39 @@ const ChatScreen = () => {
                     </View>
                 </ScrollView>
             </Modalize>
-            <SwipeListView data={data}
+            <SwipeListView data={chatData}
                 renderItem={({ item }) => <ChatItem item={item} />}
                 rightOpenValue={-300}
                 disableRightSwipe
                 keyExtractor={({ id }, index) => `${id}${index}`}
                 renderHiddenItem={({ item }) => (
-                    <View style={styles.swipeButtonsContainer}>
-                        <Pressable style={[styles.swipeButtonContainer,
-                        item.category === 'new-match' ?
-                            { backgroundColor: '#f2f2f2' } : { backgroundColor: '#9d4edd' }]}
-                            onPress={() => onFlagButtonPressed(item)}>
-                            <Text style={styles.swipeButtonContainerTextStyle}>Flag</Text>
+                    item.type === 'deleted' || item.type === 'banned' ||
+                        item.type === 'blocked' ? (
+                        <Pressable style={styles.deleteButtonContainer}
+                            onPress={() => deletingChatItem(item)}>
+                            <Image source={require('../assets/images/delete-button.png')}
+                                style={styles.deleteButtonImageStyle} />
+                            <Text style={styles.deleteTextStyle}>Delete</Text>
                         </Pressable>
-                        <Pressable style={[styles.swipeButtonContainer,
-                        { backgroundColor: '#e0e0e0' }]}>
-                            <Text style={[styles.swipeButtonContainerTextStyle,
-                            { color: '#000000' }]}>Unmatch</Text>
-                        </Pressable>
-                        <Pressable style={[styles.swipeButtonContainer,
-                        { backgroundColor: '#eb4335' }]}>
-                            <Text style={styles.swipeButtonContainerTextStyle}>Report</Text>
-                        </Pressable>
-                    </View>
+                    ) : (
+                        <View style={styles.swipeButtonsContainer}>
+                            <Pressable style={[styles.swipeButtonContainer,
+                            item.category === 'new-match' ?
+                                { backgroundColor: '#f2f2f2' } : { backgroundColor: '#9d4edd' }]}
+                                onPress={() => onFlagButtonPressed(item)}>
+                                <Text style={styles.swipeButtonContainerTextStyle}>Flag</Text>
+                            </Pressable>
+                            <Pressable style={[styles.swipeButtonContainer,
+                            { backgroundColor: '#e0e0e0' }]}>
+                                <Text style={[styles.swipeButtonContainerTextStyle,
+                                { color: '#000000' }]}>Unmatch</Text>
+                            </Pressable>
+                            <Pressable style={[styles.swipeButtonContainer,
+                            { backgroundColor: '#eb4335' }]}>
+                                <Text style={styles.swipeButtonContainerTextStyle}>Report</Text>
+                            </Pressable>
+                        </View>
+                    )
                 )}
                 style={styles.container}
                 ListHeaderComponent={
@@ -290,8 +312,9 @@ const styles = StyleSheet.create({
     },
     titleTextStyle: {
         marginLeft: 12,
-        fontSize: 22.5,
+        fontSize: 23.5,
         fontWeight: '500',
+        fontFamily: 'AvenirNext-Regular',
         color: '#ffffff',
         lineHeight: 32,
     },
@@ -432,6 +455,29 @@ const styles = StyleSheet.create({
         fontFamily: 'AvenirNext-Regular',
         color: '#9D4EDD',
         lineHeight: 21,
+    },
+    deleteButtonContainer: {
+        flex: 1,
+        marginLeft: 'auto',
+        width: 98,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#ffc1bc',
+    },
+    deleteTextStyle: {
+        marginTop: 3,
+        fontSize: 10.5,
+        fontWeight: '600',
+        fontFamily: 'AvenirNext-Regular',
+        color: '#eb4335',
+        textAlign: 'center',
+        lineHeight: 16,
+    },
+    deleteButtonImageStyle: {
+        width: 20,
+        height: 20,
+        resizeMode: 'contain',
     },
 });
 

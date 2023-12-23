@@ -10,24 +10,42 @@ const items = {
     user3: require('../../src/assets/images/user3.png'),
     user4: require('../../src/assets/images/user4.png'),
     user5: require('../../src/assets/images/user5.png'),
+    user6: require('../../src/assets/images/user6.png'),
+    user7: require('../../src/assets/images/user4.png'),
 };
 
 const ChatItem = ({ item }) => {
-    const { userId, name, type, message, status, category, message_received, message_sent } = item;
+    const { userId, name, type, message, status, category, message_received, message_sent, statusShown } = item;
 
     return (
-        <View style={styles.container}>
-            <Image source={items[userId]} style={[styles.imageStyle, name === 'Deleted User' &&
-                { width: 45, height: 45 }]} />
+        <View style={[styles.container, type === 'blocked' ?
+            { backgroundColor: '#f2f2f2' } : { backgroundColor: '#ffffff' }]}>
+            <View>
+                <Image source={items[userId]} style={[styles.imageStyle, name === 'Deleted User' &&
+                    { width: 45, height: 45 }]} />
+                {type === 'blocked' && (
+                    <>
+                        <Image source={require('../assets/images/blocked-user-image.png')}
+                            style={styles.iconStyle} />
+                        <Image source={require('../assets/images/hand-image.png')}
+                            style={styles.handIconStyle} /></>
+
+                )}
+            </View>
             <View style={styles.subContainer}>
                 <View style={styles.textContainer}>
-                    <Text style={[styles.userNameTextStyle, type === 'deleted' && { top: 5 }]}>{name}</Text>
+                    <Text style={styles.userNameTextStyle}>{name}</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         {(status === 'read' && message_received === false && message_sent === true) && (
-                            <Image source={require('../assets/images/read-line-duotone.png')}
-                                style={styles.iconStyle} />
+                            <Image source={require('../assets/images/read-line-duotone.png')} />
                         )}
-                        <Text style={category === 'new-match' && { color: '#9d4edd' }}>{message}</Text>
+                        {type === 'deleted' || type === 'banned' ||
+                            type === 'blocked' ? (
+                            <Text style={styles.statusTextStyle}>{statusShown}</Text>
+                        ) : (
+                            <Text style={[styles.messageTextStyle,
+                            category === 'new-match' && { color: '#9d4edd' }]}>{message}</Text>
+                        )}
                     </View>
                 </View>
                 {category === 'new-match' && (
@@ -51,7 +69,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#ffffff',
         borderBottomWidth: 2,
         borderBottomColor: '#f2f2f2',
     },
@@ -106,6 +123,39 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         color: '#9e5594',
         lineHeight: 16,
+    },
+    messageTextStyle: {
+        fontSize: 14,
+        fontWeight: '400',
+        fontFamily: 'AvenirNext-Regular',
+        color: '#666666',
+        lineHeight: 21,
+    },
+    statusTextStyle: {
+        fontSize: 14,
+        fontWeight: '400',
+        fontFamily: 'AvenirNext-Regular',
+        color: '#282c3f',
+        lineHeight: 21,
+    },
+    iconStyle: {
+        flex: 2,
+        position: 'absolute',
+        marginRight: 'auto',
+        marginTop: '35%',
+        width: 24,
+        height: 24,
+        resizeMode: 'contain',
+    },
+    handIconStyle: {
+        flex: 1,
+        position: 'absolute',
+        marginRight: 'auto',
+        marginLeft: '10%',
+        marginTop: '40%',
+        width: 12,
+        height: 12,
+        resizeMode: 'contain',
     },
 });
 
