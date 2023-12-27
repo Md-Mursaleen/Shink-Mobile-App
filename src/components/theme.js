@@ -1,24 +1,28 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable eol-last */
 import { Dimensions, PixelRatio } from 'react-native';
+
 export const SCREEN_WIDTH = Dimensions.get('window').width;
 export const SCREEN_HEIGHT = Dimensions.get('window').height;
+
 const scale = SCREEN_WIDTH / 375;
 const scaleHeight = SCREEN_HEIGHT / 812;
+
 export const normalize = (size, forHeight = false) => {
   const newSize = size * (forHeight ? scaleHeight : scale);
   return Math.round(PixelRatio.roundToNearestPixel(newSize));
 };
+
 const theme = {
   colors: {
-    primary: '#7B337E',
-    secondary: '#F0E4FA',
-    inactive: '#EEF1F8',
-    background: '#FFFFFF',
+    primary: '#7b337e',
+    secondary: '#f0e4fa',
+    inactive: '#eef1f8',
+    background: '#ffffff',
     grey: '#979797',
     text: '#333333',
-    accent: '#FFA500',
-    error: '#FF0000',
+    accent: '#ffa500',
+    error: '#ff0000',
   },
   fonts: {
     regular: 'Avenir Next, sans-serif',
@@ -35,24 +39,24 @@ const theme = {
     large: normalize(330),
   },
   fullLengthButton: {
+    padding: normalize(12),
+    width: normalize(340),
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    width: normalize(340),
     borderRadius: normalize(8),
-    padding: normalize(12),
   },
   inputContainer: {
     paddingVertical: normalize(4),
     paddingHorizontal: normalize(16),
+    width: normalize(340),
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    width: normalize(340),
-    borderRadius: normalize(8),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#ffffff',
     borderWidth: normalize(1),
     borderColor: '#979797',
+    borderRadius: normalize(8),
   },
   flexRow: {
     display: 'flex',

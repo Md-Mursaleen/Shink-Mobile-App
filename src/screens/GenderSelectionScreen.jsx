@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     imageStyle: {
         width: 18,
         height: 18,
-        tintColor: 'black',
+        tintColor: '#000000',
     },
     previousButtonContainer: {
         padding: 10,

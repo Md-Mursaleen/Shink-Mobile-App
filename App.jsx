@@ -5,6 +5,7 @@ import { SafeAreaView, LogBox } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { AppProvider } from './src/contexts/AppContext';
 import RootNavigation from './src/navigation/RootNavigation';
+import { ImageContextProvider } from './src/contexts/ImageContext';
 
 LogBox.ignoreAllLogs();
 
@@ -15,7 +16,9 @@ function App() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaView style={{ flex: 1 }}>
         <AppProvider>
-          <RootNavigation />
+          <ImageContextProvider>
+            <RootNavigation />
+          </ImageContextProvider>
         </AppProvider>
       </SafeAreaView>
     </GestureHandlerRootView>

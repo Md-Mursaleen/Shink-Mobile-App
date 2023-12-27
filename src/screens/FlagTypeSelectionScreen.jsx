@@ -11,6 +11,7 @@ const FlagTypeSelectionScreen = ({ route }) => {
     const [greenFlagButtonPressed, setGreenFlagButtonPressed] = useState(false);
     const [redFlagButtonPressed, setRedFlagButtonPressed] = useState(false);
     const { setIsGreenFlagModalOpened, setIsRedFlagModalOpened, editing } = route?.params;
+
     useEffect(() => {
         if (redFlagButtonPressed === true) {
             setIsRedFlagModalOpened(true);

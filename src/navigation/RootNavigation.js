@@ -20,6 +20,16 @@ import YourRelationshipScreen from '../screens/YourRelationshipScreen';
 import MyFlagsScreen from '../screens/MyFlagsScreen';
 import ReceivedFlagsScreen from '../screens/ReceivedFlagsScreen';
 import GivenFlagsScreen from '../screens/GivenFlagsScreen';
+import LoginScreen from '../screens/LoginScreen';
+import EnterNameScreen from '../screens/EnterNameScreen';
+import EnterBirthdayScreen from '../screens/EnterBirthdayScreen';
+import Under18AgeScreen from '../screens/Under18AgeScreen';
+import EnterPhoneNumberScreen from '../screens/EnterPhoneNumberScreen';
+import LocationAccessScreen from '../screens/LocationAccessScreen';
+import NotificationsAccessScreen from '../screens/NotificationsAccessScreen';
+import OTPConfirmationScreen from '../screens/OTPConfirmationScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+import ManagePhotosScreen from '../screens/ManagePhotosScreen';
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -52,7 +62,7 @@ const BottomTabNavigation = () => {
                 tabBarIcon: ({ color, size }) => <Image source={require('../assets/images/bi_chat-heart.png')}
                     width={size} height={size} tintColor={color} />,
             }} />
-            <BottomTab.Screen name="Profile" component={HomeScreen} options={{
+            <BottomTab.Screen name="Profile" component={ProfileScreen} options={{
                 tabBarLabelStyle: styles.tabBarLabelStyle,
                 tabBarIcon: ({ color, size }) => <Image source={require('../assets/images/mingcute_user.png')}
                     width={size} height={size} tintColor={color} />,
@@ -64,7 +74,7 @@ const BottomTabNavigation = () => {
 const RootNavigation = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="GenderSelection">
+            <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Agreement">
                 <Stack.Screen name="Agreement" component={AgreementScreen} />
                 <Stack.Screen name="BottomTab" component={BottomTabNavigation} />
                 <Stack.Screen name="FlagTypeSelection" component={FlagTypeSelectionScreen} />
@@ -79,6 +89,15 @@ const RootNavigation = () => {
                 <Stack.Screen name="MyFlags" component={MyFlagsScreen} />
                 <Stack.Screen name="ReceivedFlags" component={ReceivedFlagsScreen} />
                 <Stack.Screen name="GivenFlags" component={GivenFlagsScreen} />
+                <Stack.Screen name="Login" component={LoginScreen} />
+                <Stack.Screen name="EnterName" component={EnterNameScreen} />
+                <Stack.Screen name="EnterBirthday" component={EnterBirthdayScreen} />
+                <Stack.Screen name="EnterPhoneNumber" component={EnterPhoneNumberScreen} />
+                <Stack.Screen name="Under18Age" component={Under18AgeScreen} />
+                <Stack.Screen name="LocationAccess" component={LocationAccessScreen} />
+                <Stack.Screen name="NotificationsAccess" component={NotificationsAccessScreen} />
+                <Stack.Screen name="OTPConfirmation" component={OTPConfirmationScreen} />
+                <Stack.Screen name="ManagePhotos" component={ManagePhotosScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     );

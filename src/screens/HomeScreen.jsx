@@ -10,6 +10,7 @@ import { closeSvg, heartSvg, mySvgString, checkmarkSvg } from '../data/SvgImageD
 import { useNavigation } from '@react-navigation/native';
 import { SvgXml } from 'react-native-svg';
 import { Modalize } from 'react-native-modalize';
+import { normalize } from '../components/theme';
 import Swiper from 'react-native-deck-swiper';
 import Category from '../components/Category';
 import ModalItems from '../components/ModalItems';
@@ -245,7 +246,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     padding: 20,
-    marginTop: '140%',
+    marginTop: normalize(525),
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

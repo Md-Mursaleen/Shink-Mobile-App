@@ -11,12 +11,32 @@ import com.facebook.react.shell.MainReactPackage;
 import java.util.Arrays;
 import java.util.ArrayList;
 
+// @aws-amplify/react-native
+import com.amazonaws.amplify.rtncore.AmplifyRTNCorePackage;
+// @aws-amplify/rtn-web-browser
+import com.amazonaws.amplify.rtnwebbrowser.WebBrowserPackage;
+// @react-native-async-storage/async-storage
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 // @react-native-community/checkbox
 import com.reactnativecommunity.checkbox.ReactCheckBoxPackage;
+// @react-native-community/netinfo
+import com.reactnativecommunity.netinfo.NetInfoPackage;
+// react-native-fs
+import com.rnfs.RNFSPackage;
+// react-native-geolocation-service
+import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.RNGestureHandlerPackage;
+// react-native-get-random-values
+import org.linusu.RNGetRandomValuesPackage;
+// react-native-image-crop-picker
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
 // react-native-image-picker
 import com.imagepicker.ImagePickerPackage;
+// react-native-linear-gradient
+import com.BV.LinearGradient.LinearGradientPackage;
+// react-native-localize
+import com.zoontek.rnlocalize.RNLocalizePackage;
 // react-native-pager-view
 import com.reactnativepagerview.PagerViewPackage;
 // react-native-safe-area-context
@@ -72,9 +92,19 @@ public class PackageList {
   public ArrayList<ReactPackage> getPackages() {
     return new ArrayList<>(Arrays.<ReactPackage>asList(
       new MainReactPackage(mConfig),
+      new AmplifyRTNCorePackage(),
+      new WebBrowserPackage(),
+      new AsyncStoragePackage(),
       new ReactCheckBoxPackage(),
+      new NetInfoPackage(),
+      new RNFSPackage(),
+      new RNFusedLocationPackage(),
       new RNGestureHandlerPackage(),
+      new RNGetRandomValuesPackage(),
+      new PickerPackage(),
       new ImagePickerPackage(),
+      new LinearGradientPackage(),
+      new RNLocalizePackage(),
       new PagerViewPackage(),
       new SafeAreaContextPackage(),
       new RNScreensPackage(),

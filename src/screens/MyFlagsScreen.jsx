@@ -36,7 +36,7 @@ const MyFlagsScreen = () => {
             renderLabel={({ route, focused }) => (
                 <Text style={{
                     margin: 8,
-                    fontSize: 13.5,
+                    fontSize: 14,
                     fontFamily: 'AvenirNext-Regular',
                     color: focused ? '#000000' : '#979797',
                     textAlign: 'center',

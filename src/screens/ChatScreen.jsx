@@ -1,292 +1,93 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState, useRef, useEffect } from 'react';
-import { View, StyleSheet, Text, Pressable, ScrollView, Image } from 'react-native';
-import { SwipeListView } from 'react-native-swipe-list-view';
+import React, { useState } from 'react';
+import { View, StyleSheet, Text, useWindowDimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { data } from '../data/ChatData';
-import { Modalize } from 'react-native-modalize';
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import ChatItem from '../components/ChatItem';
-import ModalGreenFlagItems from '../components/ModalGreenFlagItems';
-import ModalRedFlagItems from '../components/ModalRedFlagItems';
+import AllChatScreen from '../screens/AllChatScreen';
+import UnmatchedChatScreen from './UnmatchedChatScreen';
+
+const FirstRoute = () => (
+    <AllChatScreen />
+);
+
+const SecondRoute = () => (
+    <View style={{ flex: 1, backgroundColor: '#ffffff' }} />
+);
+const ThirdRoute = () => (
+    <View style={{ flex: 1, backgroundColor: '#ffffff' }} />
+);
+
+const FourthRoute = () => (
+    <View style={{ flex: 1, backgroundColor: '#ffffff' }} />
+);
+
+const FifthRoute = () => (
+    <UnmatchedChatScreen />
+);
+
+const renderScene = SceneMap({
+    first: FirstRoute,
+    second: SecondRoute,
+    third: ThirdRoute,
+    fourth: FourthRoute,
+    fifth: FifthRoute,
+});
 
 const ChatScreen = () => {
     const navigation = useNavigation();
-    const greenFlagModalizeRef = useRef(null);
-    const redFlagModalizeRef = useRef(null);
-    const [isGreenFlagModalOpened, setIsGreenFlagModalOpened] = useState(false);
-    const [isRedFlagModalOpened, setIsRedFlagModalOpened] = useState(false);
-    const [selectedGreenFlags, setSelectedGreenFlags] = useState([]);
-    const [selectedRedFlags, setSelectedRedFlags] = useState([]);
-    const [messageText, setMessageText] = useState('');
-    const [chatData, setChatData] = useState(data);
+    const layout = useWindowDimensions();
+    const [index, setIndex] = React.useState(0);
+    const [routes] = useState([
+        { key: 'first', title: 'All' },
+        { key: 'second', title: 'Your turn' },
+        { key: 'third', title: 'Favorites' },
+        { key: 'fourth', title: 'New Matches' },
+        { key: 'fifth', title: 'Unmatched' },
+    ]);
 
-    const onFlagButtonPressed = (item) => {
-        if (item.category !== 'new-match') {
-            navigation.navigate('FlagTypeSelection', {
-                setIsGreenFlagModalOpened: setIsGreenFlagModalOpened,
-                setIsRedFlagModalOpened: setIsRedFlagModalOpened,
-                editing: false,
-            });
-        }
-    };
-
-    useEffect(() => {
-        if (isGreenFlagModalOpened === true) {
-            greenFlagModalizeRef.current?.open();
-        }
-        if (isRedFlagModalOpened === true) {
-            redFlagModalizeRef.current?.open();
-        }
-    }, [isGreenFlagModalOpened, isRedFlagModalOpened]);
-
-    const greenFlagDataItems = [
-        {
-            id: 'smart',
-            type: 'green',
-            flagName: 'Smart',
-        },
-        {
-            id: 'funny',
-            type: 'green',
-            flagName: 'Funny',
-        },
-        {
-            id: 'sexy',
-            type: 'green',
-            flagName: 'Sexy',
-        },
-        {
-            id: 'cute',
-            type: 'green',
-            flagName: 'Cute',
-        },
-        {
-            id: 'honest',
-            type: 'green',
-            flagName: 'Honest',
-        },
-        {
-            id: 'kind',
-            type: 'green',
-            flagName: 'Kind',
-        },
-        {
-            id: 'polite',
-            type: 'green',
-            flagName: 'Polite',
-        },
-        {
-            id: 'generous',
-            type: 'green',
-            flagName: 'Generous',
-        },
-    ];
-
-    const redFlagDataItems = [
-        {
-            id: 'ghoster',
-            type: 'red',
-            flagName: 'Ghoster',
-        },
-        {
-            id: 'catfish',
-            type: 'red',
-            flagName: 'Catfish',
-        },
-        {
-            id: 'badpicsender',
-            type: 'red',
-            flagName: 'Bad Pic Sender',
-        },
-        {
-            id: 'pottiemouth',
-            type: 'red',
-            flagName: 'Pottie Mouth',
-        },
-        {
-            id: 'stalker',
-            type: 'red',
-            flagName: 'Stalker',
-        },
-        {
-            id: 'fakeprofile',
-            type: 'red',
-            flagName: 'Fake Profile',
-        },
-        {
-            id: 'scammer',
-            type: 'red',
-            flagName: 'Scammer',
-        },
-        {
-            id: 'married',
-            type: 'red',
-            flagName: 'Married',
-        },
-    ];
-
-    console.log(selectedGreenFlags);
-
-    const onRedFlagSubmitButtonPressed = () => {
-        redFlagModalizeRef.current?.close();
-        setMessageText('Thank you for submitting.');
-        setTimeout(() => {
-            setMessageText('');
-        }, 2000);
-    };
-
-    const onGreenFlagSubmitButtonPressed = () => {
-        greenFlagModalizeRef.current?.close();
-        setMessageText('Thank you for submitting.');
-        setTimeout(() => {
-            setMessageText('');
-        }, 2000);
-    };
-
-    const deletingChatItem = async (chatItem) => {
-        const newChatItems = chatData.filter((item, index) =>
-            item.userId !== chatItem.userId);
-        setChatData(newChatItems);
-    };
+    const renderTabBar = props => (
+        <TabBar {...props}
+            getLabelText={({ route }) => route.title}
+            renderLabel={({ route, focused }) => (
+                <Text style={{
+                    paddingHorizontal: 10,
+                    paddingVertical: 8,
+                    width: 100,
+                    fontSize: 14,
+                    fontWeight: '600',
+                    fontFamily: 'AvenirNext-Regular',
+                    color: focused ? '#000000' : '#979797',
+                    textAlign: 'center',
+                    lineHeight: 16,
+                }}>
+                    {route.title}
+                </Text>
+            )}
+            indicatorStyle={{ backgroundColor: '#9e5594' }}
+            style={{ backgroundColor: '#ebeef2', justifyContent: 'space-between' }} />
+    );
 
     return (
-        <>
-            <Modalize ref={redFlagModalizeRef}
-                snapPoint={535}
-                onClose={() => setIsRedFlagModalOpened(false)}
-                onBackButtonPressed={() => setIsRedFlagModalOpened(false)}
-                scrollViewProps={{ showsVerticalScrollIndicator: false }}>
-                <ScrollView style={styles.modalContainer}>
-                    <View style={styles.modalSubContainer}>
-                        <View style={styles.modalHeaderButtonContainer}>
-                            <Entypo name="chevron-small-left" size={25} color={'#cfd3d6'} />
-                            <AntDesign name="closecircleo" size={17} color={'#cfd3d6'} />
-                        </View>
-                        <Text style={styles.modalTitleTextStyle}>Red Flags</Text>
-                        {redFlagDataItems.map((item, index) => (
-                            <ModalRedFlagItems key={index}
-                                item={item} selectedRedFlags={selectedRedFlags}
-                                setSelectedRedFlags={setSelectedRedFlags} />
-                        ))}
-                        <View style={styles.bottomContainer}>
-                            <Pressable style={[styles.buttonContainer,
-                            selectedRedFlags?.length >= 1 ?
-                                { backgroundColor: '#9d4edd' } :
-                                { backgroundColor: '#e0e0e0' }]}
-                                onPress={() => onRedFlagSubmitButtonPressed()}>
-                                <Text style={styles.buttonTextStyle}>Submit</Text>
-                            </Pressable>
-                        </View>
-                    </View>
-                </ScrollView>
-            </Modalize>
-            <Modalize ref={greenFlagModalizeRef}
-                snapPoint={535}
-                onClose={() => setIsGreenFlagModalOpened(false)}
-                onBackButtonPressed={() => setIsGreenFlagModalOpened(false)}
-                scrollViewProps={{ showsVerticalScrollIndicator: false }}>
-                <ScrollView style={styles.modalContainer}>
-                    <View style={styles.modalSubContainer}>
-                        <View style={styles.modalHeaderButtonContainer}>
-                            <Entypo name="chevron-small-left" size={25} color={'#cfd3d6'} />
-                            <AntDesign name="closecircleo" size={17} color={'#cfd3d6'} />
-                        </View>
-                        <Text style={styles.modalTitleTextStyle}>Green Flags</Text>
-                        {greenFlagDataItems.map((item, index) => (
-                            <ModalGreenFlagItems key={index}
-                                item={item} selectedGreenFlags={selectedGreenFlags}
-                                setSelectedGreenFlags={setSelectedGreenFlags} />
-                        ))}
-                        <View style={styles.bottomContainer}>
-                            <Pressable style={[styles.buttonContainer,
-                            selectedGreenFlags?.length >= 1 ?
-                                { backgroundColor: '#9d4edd' } :
-                                { backgroundColor: '#e0e0e0' }]}
-                                onPress={() => onGreenFlagSubmitButtonPressed()}>
-                                <Text style={styles.buttonTextStyle}>Submit</Text>
-                            </Pressable>
-                        </View>
-                    </View>
-                </ScrollView>
-            </Modalize>
-            <SwipeListView data={chatData}
-                renderItem={({ item }) => <ChatItem item={item} />}
-                rightOpenValue={-300}
-                disableRightSwipe
-                keyExtractor={({ id }, index) => `${id}${index}`}
-                renderHiddenItem={({ item }) => (
-                    item.type === 'deleted' || item.type === 'banned' ||
-                        item.type === 'blocked' ? (
-                        <Pressable style={styles.deleteButtonContainer}
-                            onPress={() => deletingChatItem(item)}>
-                            <Image source={require('../assets/images/delete-button.png')}
-                                style={styles.deleteButtonImageStyle} />
-                            <Text style={styles.deleteTextStyle}>Delete</Text>
-                        </Pressable>
-                    ) : (
-                        <View style={styles.swipeButtonsContainer}>
-                            <Pressable style={[styles.swipeButtonContainer,
-                            item.category === 'new-match' ?
-                                { backgroundColor: '#f2f2f2' } : { backgroundColor: '#9d4edd' }]}
-                                onPress={() => onFlagButtonPressed(item)}>
-                                <Text style={styles.swipeButtonContainerTextStyle}>Flag</Text>
-                            </Pressable>
-                            <Pressable style={[styles.swipeButtonContainer,
-                            { backgroundColor: '#e0e0e0' }]}>
-                                <Text style={[styles.swipeButtonContainerTextStyle,
-                                { color: '#000000' }]}>Unmatch</Text>
-                            </Pressable>
-                            <Pressable style={[styles.swipeButtonContainer,
-                            { backgroundColor: '#eb4335' }]}>
-                                <Text style={styles.swipeButtonContainerTextStyle}>Report</Text>
-                            </Pressable>
-                        </View>
-                    )
-                )}
-                style={styles.container}
-                ListHeaderComponent={
-                    <>
-                        <View style={styles.headerContainer}>
-                            <View style={styles.headerSubContainer}>
-                                <Ionicons name="arrow-back" size={22} color={'#ffffff'}
-                                    onPress={() => navigation.goBack()} />
-                                <Text style={styles.titleTextStyle}>Message</Text>
-                            </View>
-                            <Entypo name="dots-three-vertical" size={22} color={'#ffffff'}
-                                style={{ marginRight: 10 }} />
-                        </View>
-                        <View style={styles.TopTabContainer}>
-                            <View style={[styles.TopTabSubContainer,
-                            { borderBottomWidth: 2, borderBottomColor: '#9e5594' }]}>
-                                <Text style={[styles.topTabLabelTextStyle,
-                                { color: '#000000', fontWeight: '500' }]}>All</Text>
-                            </View>
-                            <View style={styles.TopTabSubContainer}>
-                                <Text style={[styles.topTabLabelTextStyle, { color: '#979797' }]}>Your Turn</Text>
-                            </View>
-                            <View style={styles.TopTabSubContainer}>
-                                <Text style={[styles.topTabLabelTextStyle, { color: '#979797' }]}>New Match's</Text>
-                            </View>
-                            <View style={styles.TopTabSubContainer} >
-                                <Text style={[styles.topTabLabelTextStyle, { color: '#979797' }]}>Un Shink</Text>
-                            </View>
-                        </View>
-                    </>
-                }
-                ListFooterComponent={
-                    <>
-                        {messageText !== '' && (
-                            <View style={styles.messageTextContainer}>
-                                <Text style={styles.messageTextStyle}>{messageText}</Text>
-                            </View>
-                        )}
-                    </>
-                } />
-        </>
+        <View style={styles.container}>
+            <View style={styles.headerContainer}>
+                <View style={styles.headerSubContainer}>
+                    <Ionicons name="arrow-back" size={22} color={'#ffffff'}
+                        onPress={() => navigation.goBack()} />
+                    <Text style={styles.titleTextStyle}>Message</Text>
+                </View>
+                <Entypo name="dots-three-vertical" size={22} color={'#ffffff'}
+                    style={{ marginRight: 10 }} />
+            </View>
+            <TabView navigationState={{ index, routes }}
+                renderScene={renderScene}
+                onIndexChange={setIndex}
+                initialLayout={{ width: layout.width }}
+                swipeEnabled={false}
+                renderTabBar={renderTabBar} />
+        </View>
     );
 };
 
@@ -317,167 +118,6 @@ const styles = StyleSheet.create({
         fontFamily: 'AvenirNext-Regular',
         color: '#ffffff',
         lineHeight: 32,
-    },
-    swipeButtonsContainer: {
-        flex: 1,
-        marginLeft: 'auto',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    swipeButtonContainer: {
-        width: 100,
-        height: 80,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    swipeButtonContainerTextStyle: {
-        fontSize: 10,
-        fontWeight: '400',
-        color: '#ffffff',
-        lineHeight: 16,
-    },
-    TopTabContainer: {
-        width: '100%',
-        height: 58,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        backgroundColor: '#ebeef2',
-    },
-    TopTabSubContainer: {
-        width: 80,
-        height: 58,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    topTabLabelTextStyle: {
-        fontSize: 12.5,
-        textAlign: 'center',
-        lineHeight: 16,
-    },
-    modalContainer: {
-        flex: 1,
-        backgroundColor: 'rgba(53, 78, 102, 0.1)',
-    },
-    modalSubContainer: {
-        marginTop: 'auto',
-        width: '100%',
-        backgroundColor: '#ffffff',
-        borderTopLeftRadius: 12,
-        borderTopRightRadius: 12,
-    },
-    modalHeaderButtonContainer: {
-        marginTop: 6,
-        marginHorizontal: 10,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-    },
-    modalTitleTextStyle: {
-        marginTop: 12,
-        marginBottom: 12,
-        marginLeft: 15,
-        fontSize: 16,
-        fontWeight: '600',
-        fontFamily: 'AvenirNext-Regular',
-        color: '#666666',
-        lineHeight: 21,
-    },
-    bottomContainer: {
-        marginTop: 'auto',
-        padding: 13,
-        borderWidth: 1,
-        borderColor: '#f4f4f4',
-    },
-    buttonContainer: {
-        padding: 6.5,
-        marginHorizontal: 10,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 30,
-    },
-    buttonTextStyle: {
-        fontSize: 16,
-        fontWeight: '600',
-        color: '#ffffff',
-        lineHeight: 23.4,
-    },
-    subContainer: {
-        marginHorizontal: 15,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-    },
-    contentContainer: {
-        paddingHorizontal: 15,
-        paddingVertical: 8,
-        marginVertical: 5,
-        width: '100%',
-        height: 40,
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderWidth: 1,
-        borderRadius: 8,
-    },
-    imageStyle: {
-        width: 23,
-        height: 23,
-    },
-    flagNameTextStyle: {
-        marginLeft: 10,
-        fontSize: 12,
-        fontWeight: '400',
-        fontFamily: 'AvenirNext-Regular',
-        color: '#000000',
-        lineHeight: 16,
-    },
-    checkboxStyle: {
-        flex: 1,
-        marginLeft: -40,
-    },
-    messageTextContainer: {
-        marginTop: '30%',
-        width: '78%',
-        height: 42,
-        paddingVertical: 8,
-        paddingHorizontal: 16,
-        alignItems: 'center',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        backgroundColor: '#f0e4fa',
-        borderRadius: 8,
-    },
-    messageTextStyle: {
-        fontSize: 14,
-        fontWeight: '400',
-        fontFamily: 'AvenirNext-Regular',
-        color: '#9D4EDD',
-        lineHeight: 21,
-    },
-    deleteButtonContainer: {
-        flex: 1,
-        marginLeft: 'auto',
-        width: 98,
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#ffc1bc',
-    },
-    deleteTextStyle: {
-        marginTop: 3,
-        fontSize: 10.5,
-        fontWeight: '600',
-        fontFamily: 'AvenirNext-Regular',
-        color: '#eb4335',
-        textAlign: 'center',
-        lineHeight: 16,
-    },
-    deleteButtonImageStyle: {
-        width: 20,
-        height: 20,
-        resizeMode: 'contain',
     },
 });
 

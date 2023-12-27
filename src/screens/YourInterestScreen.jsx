@@ -19,6 +19,11 @@ const YourInterestScreen = () => {
             setSelectedInterest([...selectedInterests, item.text]);
         }
     };
+    const handleOnPress = () => {
+        if (selectedInterests.length >= 1) {
+            navigation.navigate('Agreement');
+        }
+    };
 
     return (
         <>
@@ -41,7 +46,7 @@ const YourInterestScreen = () => {
                 selectedInterests.length >= 1 ?
                     { backgroundColor: "#9d4edd" } :
                     { backgroundColor: "#e0e0e0" }]}
-                    onPress={() => navigation.navigate('Agreement')}>
+                    onPress={() => handleOnPress()}>
                     <Text style={styles.buttonTextStyle}>Continue</Text>
                     {/* <Text>{" "}</Text>
                     <Text style={styles.selectedInterestsLengthTextStyle}>{selectedInterests.length}</Text>
@@ -65,6 +70,7 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         marginTop: 15,
+        marginBottom: '16%',
         flexDirection: "row",
         alignItems: "center",
         flexWrap: "wrap",
@@ -85,9 +91,11 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     bottomContainer: {
+        paddingVertical: 3,
         paddingHorizontal: 20,
         flexDirection: 'row',
         alignItems: 'center',
+        backgroundColor: '#ffffff',
         borderTopWidth: 1,
         borderTopColor: '#f2f2f2',
     },

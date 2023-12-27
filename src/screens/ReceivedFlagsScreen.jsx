@@ -328,7 +328,7 @@ const styles = StyleSheet.create({
         lineHeight: 16,
     },
     bottomButtonsContainer: {
-        marginTop: 10,
+        marginTop: 18,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -341,7 +341,7 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         paddingVertical: 5,
-        paddingHorizontal: 9,
+        paddingHorizontal: 11,
         backgroundColor: '#f0e4fa',
         borderWidth: 1,
         borderColor: '#9d4edd',
